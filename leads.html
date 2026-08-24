@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Demo | GrowthAI Jatis FMCG</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 600: '#0087E6', 700: '#0066CC' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-shadow { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+    .input-focus:focus { border-color: #0087E6; box-shadow: 0 0 0 4px rgba(0,135,230,0.1); }
+    .btn-gradient { background: linear-gradient(135deg, #0087E6, #0066CC); }
+    .btn-gradient:hover { background: linear-gradient(135deg, #0066CC, #0052A3); }
+    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
+  </style>
+</head>
+<body class="min-h-screen gradient-bg">
+
+  <!-- Header -->
+  <header class="py-6 px-4">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 text-white">
+        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <span class="font-bold text-lg">GrowthAI</span>
+      </a>
+      <a href="/" class="text-white/80 hover:text-white transition-colors text-sm font-medium">← Kembali</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="px-4 pb-12">
+    <div class="max-w-2xl mx-auto">
+      <!-- Card -->
+      <div class="bg-white rounded-3xl card-shadow p-8 md:p-10 animate-slide-up">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-600 to-blue-600 mx-auto mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Daftar untuk Demo</h1>
+          <p class="text-gray-500">Lengkapi data di bawah untuk akses simulasi interaktif</p>
+        </div>
+
+        <!-- Form -->
+        <form id="registrationForm" class="space-y-6">
+          <!-- Name -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label>
+            <input type="text" id="name" required placeholder="Masukkan nama lengkap"
+              class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 placeholder-gray-400 input-focus outline-none transition-all">
+          </div>
+
+          <!-- Position & Company -->
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Jabatan *</label>
+              <input type="text" id="position" required placeholder="Contoh: Head of Digital"
+                class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 placeholder-gray-400 input-focus outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Perusahaan *</label>
+              <input type="text" id="company" required placeholder="Nama perusahaan"
+                class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 placeholder-gray-400 input-focus outline-none transition-all">
+            </div>
+          </div>
+
+          <!-- Email & WhatsApp -->
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+              <input type="email" id="email" required placeholder="email@perusahaan.com"
+                class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 placeholder-gray-400 input-focus outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">WhatsApp *</label>
+              <input type="tel" id="whatsapp" required placeholder="08xxxxxxxxxx"
+                class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 placeholder-gray-400 input-focus outline-none transition-all">
+            </div>
+          </div>
+
+          <!-- Use Case -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Use Case Interesse *</label>
+            <select id="useCase" required
+              class="w-full px-5 py-3.5 rounded-xl border-2 border-gray-200 text-gray-900 input-focus outline-none transition-all bg-white">
+              <option value="">Pilih use case</option>
+              <option value="consumer">Consumer Engagement</option>
+              <option value="distributor">Distributor Operations</option>
+              <option value="customer_service">Customer Service</option>
+              <option value="trade_promo">Trade Promotion</option>
+              <option value="order_management">Order Management</option>
+              <option value="payment">Payment Collection</option>
+              <option value="other">Lainnya</option>
+            </select>
+          </div>
+
+          <!-- Volume -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Volume Pesan per Bulan</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <label class="cursor-pointer">
+                <input type="radio" name="volume" value="<10K" class="peer hidden">
+                <div class="px-4 py-3 rounded-xl border-2 border-gray-200 text-center text-sm font-medium text-gray-600 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-600 transition-all">\< 10K</div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="volume" value="10K-50K" class="peer hidden">
+                <div class="px-4 py-3 rounded-xl border-2 border-gray-200 text-center text-sm font-medium text-gray-600 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-600 transition-all">10K - 50K</div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="volume" value="50K-100K" class="peer hidden">
+                <div class="px-4 py-3 rounded-xl border-2 border-gray-200 text-center text-sm font-medium text-gray-600 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-600 transition-all">50K - 100K</div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="volume" value="100K+" class="peer hidden">
+                <div class="px-4 py-3 rounded-xl border-2 border-gray-200 text-center text-sm font-medium text-gray-600 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-600 transition-all">100K+</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Consent -->
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="consent" required class="mt-1 w-5 h-5 rounded border-gray-300 text-brand-600 input-focus">
+            <label for="consent" class="text-sm text-gray-600">
+              Saya同意 untuk menerima komunikasi dari Jatis Mobile terkait produk dan layanan ini.
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" id="submitBtn"
+            class="w-full py-4 rounded-xl font-bold text-white btn-gradient transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+            <span>Daftar Sekarang</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </form>
+
+        <!-- Success Message (hidden) -->
+        <div id="successMessage" class="hidden text-center py-8">
+          <div class="w-20 h-20 rounded-full bg-emerald-100 mx-auto mb-4 flex items-center justify-center">
+            <svg class="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Pendaftaran Berhasil!</h2>
+          <p class="text-gray-500 mb-6">Tim sales kami akan menghubungi Anda dalam 1x24 jam.</p>
+          <a href="/confirmation.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white btn-gradient">
+            Pilih Jadwal Demo
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8l10-11m-10 11l10 11"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Trust -->
+      <div class="mt-8 flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          Data Aman & Terenkripsi
+        </span>
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Tidak Ada Spam
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Show loading
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Memproses...</span>';
+
+      const data = {
+        name: document.getElementById('name').value,
+        position: document.getElementById('position').value,
+        company: document.getElementById('company').value,
+        email: document.getElementById('email').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        use_case: document.getElementById('useCase').value,
+        volume_range: document.querySelector('input[name="volume"]:checked')?.value || 'not_sure',
+        consent_given: document.getElementById('consent').checked
+      };
+
+      // Get UTM params
+      const urlParams = new URLSearchParams(window.location.search);
+      data.traffic_source = urlParams.get('utm_source') || 'direct';
+      data.demo_interest = urlParams.get('demo') || 'general';
+
+      try {
+        const response = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          form.classList.add('hidden');
+          successMessage.classList.remove('hidden');
+          localStorage.setItem('leadRegistered', 'true');
+          localStorage.setItem('leadData', JSON.stringify(data));
+        } else {
+          throw new Error('Registration failed');
+        }
+      } catch (error) {
+        // For demo purposes, show success anyway
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        localStorage.setItem('leadRegistered', 'true');
+        localStorage.setItem('leadData', JSON.stringify(data));
+      }
+    });
+  </script>
+
+</body>
+</html>

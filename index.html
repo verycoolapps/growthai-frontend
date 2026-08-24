@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrowthAI | Jatis FMCG DemoHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#0087E6', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(0,135,230,0.3)} 50%{box-shadow:0 0 40px rgba(0,135,230,0.5)} }
+    @keyframes slide-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-float-delay { animation: float 6s ease-in-out infinite 2s; }
+    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+    .animate-gradient { background-size: 200% 200%; animation: gradient-shift 8s ease infinite; }
+    .glass { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.5); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+    .btn-primary { background: linear-gradient(135deg, #0087E6, #0066CC); box-shadow: 0 4px 15px rgba(0,135,230,0.4); transition: all 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,135,230,0.5); }
+    .btn-secondary { border: 2px solid #e5e7eb; transition: all 0.3s ease; }
+    .btn-secondary:hover { border-color: #0087E6; color: #0087E6; }
+    .badge-gradient { background: linear-gradient(135deg, rgba(0,135,230,0.1), rgba(0,212,170,0.1)); border: 1px solid rgba(0,135,230,0.2); }
+    .gradient-text { background: linear-gradient(135deg, #0087E6, #00D4AA, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .scroll-indicator { animation: float 2s ease-in-out infinite; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-600 to-blue-600 flex items-center justify-center shadow-lg shadow-brand-600/20 animate-pulse-glow">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <p class="font-bold text-xl text-gray-900">GrowthAI</p>
+            <p class="text-xs text-gray-500">by Jatis Mobile</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#demos" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Demos</a>
+          <a href="#features" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Features</a>
+          <a href="/admin" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Admin</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="/admin" class="btn-secondary px-4 py-2 rounded-xl text-sm font-medium hidden sm:inline-block">Login</a>
+          <a href="#demos" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white inline-block">Try Demos</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-brand-100 to-brand-50 rounded-full blur-3xl opacity-60 animate-float"></div>
+      <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-gradient-to-br from-orange-100 to-amber-50 rounded-full blur-3xl opacity-60 animate-float-delay"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-to-r from-brand-50 via-transparent to-violet-50 rounded-full blur-3xl opacity-30"></div>
+    </div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-50 border border-brand-200 mb-8 animate-slide-up">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-sm font-semibold text-brand-600">Interactive Demo Hub for FMCG</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 animate-slide-up">
+        <span class="gradient-text">Jatis FMCG</span>
+        <br>
+        <span class="text-gray-900">DemoHub</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-xl md:text-2xl text-gray-600 font-medium mb-4 animate-slide-up">"Try Before You Talk to Sales"</p>
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-12 animate-slide-up">
+        Experience WhatsApp Business Platform, AI Chatbot, RoboCall, dan Enterprise Messaging melalui simulasi operasional yang relevan dengan KPI FMCG Anda.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up">
+        <a href="#demos" class="btn-primary px-10 py-4 rounded-2xl font-semibold text-white text-lg inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Explore Demos
+        </a>
+        <a href="/admin" class="btn-secondary px-10 py-4 rounded-2xl font-semibold text-lg inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Admin Panel
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="flex flex-wrap justify-center gap-4 mb-16 animate-slide-up">
+        <div class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-gray-900">ISO 9001:2015</p>
+            <p class="text-xs text-gray-500">Quality Management</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-gray-900">500+ Klien</p>
+            <p class="text-xs text-gray-500">Enterprise Clients</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-gray-900">100M+ Pesan</p>
+            <p class="text-xs text-gray-500">per bulan</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+          <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="text-left">
+            <p class="text-sm font-bold text-gray-900">99.9% Uptime</p>
+            <p class="text-xs text-gray-500">SLA Guarantee</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto animate-slide-up">
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+          <p class="text-3xl sm:text-4xl font-extrabold text-brand-600">2,847+</p>
+          <p class="text-sm text-gray-500 mt-1">Leads Generated</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+          <p class="text-3xl sm:text-4xl font-extrabold text-emerald-600">1,523</p>
+          <p class="text-sm text-gray-500 mt-1">Demo Completions</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+          <p class="text-3xl sm:text-4xl font-extrabold text-violet-600">4.2m</p>
+          <p class="text-sm text-gray-500 mt-1">Avg. Session</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+          <p class="text-3xl sm:text-4xl font-extrabold text-orange-600">23%</p>
+          <p class="text-sm text-gray-500 mt-1">Conversion Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
+      <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- Demos Section -->
+  <section id="demos" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-amber-50 text-amber-600 border border-amber-200 mb-6">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          SIMULASI INTERAKTIF
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          3 Demo yang Bisa Anda Coba <span class="text-brand-600">Sekarang</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+          Setiap demo adalah simulasi operasional lengkap — bukan fake UI. Anda akan lihat apa yang terjadi di balik layar Jatis Mobile.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- WhatsApp Chat -->
+        <div class="relative bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden card-hover">
+          <div class="h-1.5 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+          <div class="p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-3xl shadow-lg">🛒</div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Chat Commerce</h3>
+                  <p class="text-sm text-gray-500">WhatsApp Business Platform</p>
+                </div>
+              </div>
+              <span class="badge-gradient px-3 py-1 rounded-full text-xs font-medium text-brand-600">SIMULASI</span>
+            </div>
+            <p class="text-gray-600 mb-6">Simulasi lengkap chat commerce — katalog produk, order taking, konfirmasi stok, hingga digital receipt.</p>
+            <div class="flex gap-6 p-4 rounded-2xl bg-gray-50 mb-6">
+              <div><p class="text-2xl font-bold text-gray-900">23%</p><p class="text-xs text-gray-500">Conversion</p></div>
+              <div><p class="text-2xl font-bold text-gray-900">Rp 850Rb</p><p class="text-xs text-gray-500">Avg Order</p></div>
+            </div>
+            <a href="/leads.html?demo=whatsapp" class="flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-semibold bg-gray-900 text-white hover:bg-gray-800 transition-all">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              Coba Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- AI Chatbot -->
+        <div class="relative bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden card-hover">
+          <div class="h-1.5 bg-gradient-to-r from-violet-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center text-3xl shadow-lg">🤖</div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Ngobrol.ai</h3>
+                  <p class="text-sm text-gray-500">AI Chatbot untuk Distributor</p>
+                </div>
+              </div>
+              <span class="badge-gradient px-3 py-1 rounded-full text-xs font-medium text-brand-600">SIMULASI</span>
+            </div>
+            <p class="text-gray-600 mb-6">AI chatbot menangani pertanyaan distributor — shipping status, retur policy, hingga ticket creation.</p>
+            <div class="flex gap-6 p-4 rounded-2xl bg-gray-50 mb-6">
+              <div><p class="text-2xl font-bold text-gray-900">87%</p><p class="text-xs text-gray-500">FAQ Resolution</p></div>
+              <div><p class="text-2xl font-bold text-gray-900">65%</p><p class="text-xs text-gray-500">CS Load Reduction</p></div>
+            </div>
+            <a href="/leads.html?demo=chatbot" class="flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-semibold bg-gray-900 text-white hover:bg-gray-800 transition-all">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              Coba Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- RoboCall -->
+        <div class="relative bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden card-hover">
+          <div class="h-1.5 bg-gradient-to-r from-orange-400 to-amber-500"></div>
+          <div class="p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-3xl shadow-lg">📞</div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">RoboCall</h3>
+                  <p class="text-sm text-gray-500">AI Voice Agent Payment Reminder</p>
+                </div>
+              </div>
+              <span class="badge-gradient px-3 py-1 rounded-full text-xs font-medium text-brand-600">SIMULASI</span>
+            </div>
+            <p class="text-gray-600 mb-6">AI voice agent untuk reminder pembayaran otomatis — IVR, konfirmasi, dan escalation ke WhatsApp.</p>
+            <div class="flex gap-6 p-4 rounded-2xl bg-gray-50 mb-6">
+              <div><p class="text-2xl font-bold text-gray-900">+34%</p><p class="text-xs text-gray-500">Collection Rate</p></div>
+              <div><p class="text-2xl font-bold text-gray-900">89%</p><p class="text-xs text-gray-500">Call Success</p></div>
+            </div>
+            <a href="/leads.html?demo=robocall" class="flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-semibold bg-gray-900 text-white hover:bg-gray-800 transition-all">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              Coba Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200 mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          FITUR UNGGULAN
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          Mengapa DemoHub <span class="text-brand-600">Berbeda</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-xl mx-auto">Tidak ada demo lain yang memberikan pengalaman seinteraktif dan seabstrak ini.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="group bg-white rounded-3xl p-8 border border-gray-100 hover:border-brand-200 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">Demo Interaktif Real-Time</h3>
+              <p class="text-gray-600">Bukan slideshow. Pilih persona, input, dan lihat output nyata dari sistem Jatis Mobile.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl p-8 border border-gray-100 hover:border-emerald-200 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">Simulasi Tanpa Risiko</h3>
+              <p class="text-gray-600">Tidak ada data klien nyata. Tidak ada broadcast nyata. Semua sandbox.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl p-8 border border-gray-100 hover:border-violet-200 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.59 5 18 5s3 1.343 3 3.343a8 8 0 01-.828 3.314z"/></svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-violet-600 transition-colors">Lead Qualification Otomatis</h3>
+              <p class="text-gray-600">Demo yang dicoba, use case yang dipilih — semua jadi sinyal untuk lead scoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="group bg-white rounded-3xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-5">
+            <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">WhatsApp OTP Verification</h3>
+              <p class="text-gray-600">Nomor diverifikasi via OTP sebelum lead dikirim ke sales team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="py-16 bg-gray-50 border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm font-medium text-gray-400 mb-8">TRUSTED BY LEADING FMCG COMPANIES</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-60">
+        <div class="text-xl font-bold text-gray-400">Indomaret</div>
+        <div class="text-xl font-bold text-gray-400">Alfamart</div>
+        <div class="text-xl font-bold text-gray-400">Indofood</div>
+        <div class="text-xl font-bold text-gray-400">Unilever</div>
+        <div class="text-xl font-bold text-gray-400">Astra</div>
+        <div class="text-xl font-bold text-gray-400">Salim Group</div>
+        <div class="text-xl font-bold text-gray-400">Telkom</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gradient-to-br from-brand-600 via-brand-500 to-violet-600 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <svg class="w-16 h-16 text-white/80 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">Siap Coba?</h2>
+      <p class="text-xl text-white/80 mb-10 max-w-xl mx-auto">
+        Pilih demo yang paling relevan dengan peran Anda, coba simulasi interaktif, dan daftarkan diri untuk lanjut ke free trial.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#demos" class="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl font-bold text-brand-600 bg-white hover:bg-gray-100 transition-all shadow-xl">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Mulai Demo Sekarang
+        </a>
+        <a href="/leads.html" class="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-2xl font-semibold text-white border-2 border-white/30 hover:bg-white/10 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          Daftar Sekarang
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <p class="font-bold text-white">GrowthAI DemoHub</p>
+            <p class="text-xs text-gray-400">by Jatis Mobile</p>
+          </div>
+        </div>
+        <p class="text-sm text-gray-400">© 2026 Jatis Mobile. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
